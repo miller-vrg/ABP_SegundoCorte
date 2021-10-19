@@ -5,7 +5,7 @@ Autor Miler vargas mola
 
 Requisitos
 
-Maria DB
+Base de Datos 
 Jdk 8 o superior
 
 Nota
