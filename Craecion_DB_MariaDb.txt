@@ -1,0 +1,63 @@
+NOMBRE DE LA DB: test (MOTOR DE BASE DE DATOS MARIA DB)
+
+CREATE TABLE `organizacion` ( 
+  `numCuenta` INT NOT NULL,
+  `nombre` VARCHAR(15) NULL DEFAULT NULL ,
+  `direccion` VARCHAR(15) NULL DEFAULT NULL ,
+  `tipo` VARCHAR(15) NULL DEFAULT NULL ,
+  `tipoCuenta` VARCHAR(15) NULL DEFAULT NULL ,
+  `codigoOficina` INT NOT NULL,
+  `codigo` INT NOT NULL,
+  `nombreRepresentante` VARCHAR(50) NULL DEFAULT NULL ,
+  `apellido1Representate` VARCHAR(15) NULL DEFAULT NULL ,
+  `apellido2Representate` VARCHAR(15) NULL DEFAULT NULL ,
+  `ccRepre` INT NULL DEFAULT NULL ,
+  `nombreNoEmpleado` VARCHAR(15) NULL DEFAULT NULL ,
+  `apellido1NoEmpleado` VARCHAR(15) NULL DEFAULT NULL ,
+  `apellido2NoEmpleado` VARCHAR(15) NULL DEFAULT NULL ,
+  `ccNoEmple` INT NULL DEFAULT NULL ,
+  `fondo` DECIMAL(10,0) NULL DEFAULT NULL ,
+  `tiempo` INT NOT NULL DEFAULT 0 
+);
+CREATE TABLE `sucursales` ( 
+  `cuenta` INT AUTO_INCREMENT NOT NULL,
+  `codigo` INT NULL DEFAULT NULL ,
+  `postal` INT NULL DEFAULT NULL ,
+  `direccion` VARCHAR(25) NULL DEFAULT NULL ,
+  `cargo` VARCHAR(15) NULL DEFAULT NULL ,
+  `nombre1` VARCHAR(15) NULL DEFAULT NULL ,
+  `nombre2` VARCHAR(15) NULL DEFAULT NULL ,
+  `apellido1` VARCHAR(15) NULL DEFAULT NULL ,
+  `apellido2` VARCHAR(15) NULL DEFAULT NULL ,
+  `cc` INT NULL DEFAULT NULL ,
+  CONSTRAINT `PRIMARY` PRIMARY KEY (`cuenta`),
+  CONSTRAINT `ccc` UNIQUE (`codigo`)
+);
+CREATE TABLE `empleados` ( 
+  `cuenta` INT AUTO_INCREMENT NOT NULL,
+  `codigo` INT NOT NULL,
+  `nombre1` VARCHAR(15) NULL DEFAULT NULL ,
+  `nombre2` VARCHAR(15) NULL DEFAULT NULL ,
+  `apellido1` VARCHAR(15) NULL DEFAULT NULL ,
+  `apellido2` VARCHAR(15) NULL DEFAULT NULL ,
+  `cc` INT NULL DEFAULT NULL ,
+  CONSTRAINT `PRIMARY` PRIMARY KEY (`cuenta`)
+);
+CREATE TABLE `persona` ( 
+  `numCuenta` INT NOT NULL,
+  `nombre1` VARCHAR(20) NULL DEFAULT NULL ,
+  `nombre2` VARCHAR(15) NULL DEFAULT NULL ,
+  `apellido1` VARCHAR(15) NULL DEFAULT NULL ,
+  `apellido2` VARCHAR(15) NULL DEFAULT NULL ,
+  `cc` VARCHAR(15) NULL DEFAULT NULL ,
+  `direccion` VARCHAR(15) NULL DEFAULT NULL ,
+  `nacimiento` VARCHAR(15) NULL DEFAULT NULL ,
+  `sexo` VARCHAR(15) NULL DEFAULT NULL ,
+  `tipoCuenta` VARCHAR(15) NULL DEFAULT NULL ,
+  `codigoOficina` INT NOT NULL,
+  `codigo` INT NOT NULL,
+  `fondo` DECIMAL(30,0) NULL DEFAULT NULL ,
+  `tiempo` INT NULL DEFAULT 0 ,
+  CONSTRAINT `PRIMARY` PRIMARY KEY (`numCuenta`),
+  CONSTRAINT `numCuenta` UNIQUE (`numCuenta`)
+);
