@@ -10,4 +10,4 @@ Jdk 8 o superior
 
 Nota
 
-La craeacion de la base de datos estan en txt (Craecion_DB_MariaDb)
+La craeación de la base de datos estan en txt (Craecion_DB_MariaDb)
