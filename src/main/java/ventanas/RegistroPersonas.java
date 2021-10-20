@@ -406,91 +406,9 @@ mensajeError.setBorder(new RoundedBorder(15));
     //                  Guardar
 //==============================================================
 
-public void guardar(){
+public void guardar() {
 
-PreparedStatement prepared = null;
-    Conector objtConec = new Conector();
-    Connection conexion = null;
-
-    JTextField fon = null;
-    boolean entrada = false;
-
-    try{
-
-    conexion = objtConec.getConexion();
-
-   numCuenta = crearNumCuenta();
-    sex = (masculino.isSelected())? "Masculino":"Femenino";
-    fecha = "" + spiDia.getValue() + "-" + spiMes.getValue() + "-" + spiYear.getValue();
-
-    tipoCuentaTxt = tipoCuenta.getSelectedItem().toString();
-
-    System.out.print(tipoCuentaTxt);
-
-if("Ahorro".equals(tipoCuentaTxt)) {
-
-    JFrame venAhorro = new JFrame("Cuenta Ahorro");
-    venAhorro.setSize(500,250);
-    venAhorro.getContentPane().setLayout(null);
-    venAhorro.getContentPane().setBackground(new Color(27,38,49));
-
-    JLabel titulo = new JLabel("Amortización", JLabel.CENTER);
-    titulo.setForeground(new Color(0,164,255));
-    titulo.setFont(new Font("Sansita",3,18));
-
-    JPanel panel = new JPanel(new FlowLayout());
-    panel.setBackground(new Color(19,28,51));
-    panel.setBounds(0,0,501,40);
-    panel.add(titulo);
-
-    JLabel renta = new JLabel("Renta: ");
-    renta.setForeground(new Color(0,164,255));
-    renta.setFont(new Font("Sansita",1,12));
-    renta.setBounds(47,50,120,30);
-
-    JTextField txtFon = new JTextField(20);
-    txtFon.setBounds(140,50,200,30);
-
-    JLabel interes = new JLabel("Interes:            5% Anual");
-    interes.setForeground(new Color(0,164,255));
-    interes.setFont(new Font("Sansita",1,12));
-    interes.setBounds(47,110,200,30);
-
-    JLabel cuotas = new JLabel("Cuotas: ");
-    cuotas.setForeground(new Color(0,164,255));
-    cuotas.setFont(new Font("Sansita",1,12));
-    cuotas.setBounds(47,160,120,30);
-
-    JTextField txtCuotas = new JTextField(20);
-    txtCuotas.setBounds(140,160,200,30);
-
-    JLabel conte = new JLabel(new ImageIcon(getClass().getResource("/iconMax/ahorros.png")));
-    conte.setBounds(360,40,128,128);
-
-    JButton btnGuardar = new JButton("Guardar");
-    btnGuardar.setForeground(new Color(0,164,255));
-    btnGuardar.setBorder(BorderFactory.createLineBorder(new Color(0,164,255)));
-    btnGuardar.setBorder(new RoundedBorder(15));
-    btnGuardar.setBackground(new Color(27,38,49));
-    btnGuardar.setBounds(360,176,120,20);
-
-    venAhorro.getContentPane().add(panel);
-    venAhorro.getContentPane().add(renta);
-    venAhorro.getContentPane().add(txtFon);
-    venAhorro.getContentPane().add(interes);
-    venAhorro.getContentPane().add(txtCuotas);
-    venAhorro.getContentPane().add(cuotas);
-    venAhorro.getContentPane().add(conte);
-    venAhorro.getContentPane().add(btnGuardar);
-
-    venAhorro.setResizable(false);
-    venAhorro.setLocationRelativeTo(null);
-    venAhorro.setVisible(true);
-
-    btnGuardar.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-									if(!(
+							if(!(
 										"".equals(campoNombre1.getText())  &&
 											"".equals(campoApellido1.getText())  &&
 											"".equals(campoApellido2.getText())  &&
@@ -498,282 +416,160 @@ if("Ahorro".equals(tipoCuentaTxt)) {
 											"".equals(campoCc.getText()) &&
 											"".equals(campoCodigoOficina.getText()))){
 
-										try {
-											venAhorro.setVisible(true);
-											tiempo = Integer.parseInt(txtCuotas.getText());
-											fondo = Double.parseDouble(txtFon.getText());
-
-
-											PreparedStatement prepared = null;
-											Conector objtConec = new Conector();
-											Connection conexion = null;
-
-											try {
-
-												if (  fondo == 0 && tiempo == 0) {
-
-													conexion = objtConec.getConexion();
-													prepared = conexion.prepareStatement("INSERT INTO persona (numCuenta,nombre1,nombre2,apellido1,apellido2,cc,direccion,nacimiento,sexo,tipoCuenta,codigoOficina,codigo,fondo,tiempo) "
-														+ "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
-
-													prepared.setInt(1, numCuenta);
-													prepared.setString(2, campoNombre1.getText());
-													prepared.setString(3, campoNombre2.getText());
-													prepared.setString(4, campoApellido1.getText());
-													prepared.setString(5, campoApellido2.getText());
-													prepared.setString(6, campoCc.getText());
-													prepared.setString(7, campoAddress.getText());
-													prepared.setString(8, fecha);
-													prepared.setString(9, sex);
-													prepared.setString(10, tipoCuentaTxt);
-													prepared.setInt(11, Integer.parseInt(campoCodigoOficina.getText()));
-													prepared.setInt(12, codigoSeguridad());
-													prepared.setDouble(13, fondo);
-													prepared.setInt(14, tiempo);
-
-													prepared.executeUpdate();
-
-													Object[] fila = new Object[14];
-
-													fila[0] = numCuenta;
-													fila[1] = campoNombre1.getText();
-													fila[2] = campoNombre2.getText();
-													fila[3] = campoApellido1.getText();
-													fila[4] = campoApellido2.getText();
-													fila[5] = campoCc.getText();
-													fila[6] = campoAddress.getText();
-													fila[7] = fecha;
-													fila[8] = sex;
-													fila[9] = tipoCuentaTxt;
-													fila[10] = campoCodigoOficina.getText();
-													fila[11] = codigoSeguridad();
-													fila[12] = fondo;
-													fila[13] = tiempo;
-
-
-													TablaPersonas agregar = new TablaPersonas();
-													agregar.modelo(fila);
-													limpiar();
-
-
-												}else{
-
-													JLabel error = new JLabel(new ImageIcon(getClass().getResource("/iconMax/error.png")));
-													error.setBounds(100, 0, 260, 260);
-
-													JLabel mensajeError = new JLabel("Error fondos vacios!");
-													mensajeError.setHorizontalAlignment(JLabel.CENTER);
-													mensajeError.setFont(new Font("SansSerif", 3, 14));
-													mensajeError.setForeground(new Color(224, 8, 10));
-													mensajeError.setBounds(130, 250, 200, 40);
-
-													limpiar();
-													removeAll();
-													updateUI();
-													setLayout(null);
-
-													add(error);
-													add(mensajeError);
-
-												}
-											} catch (SQLException ex) {
-
-												JLabel error = new JLabel(new ImageIcon(getClass().getResource("/iconMax/error.png")));
-												error.setBounds(100, 0, 260, 260);
-
-												JLabel mensajeError = new JLabel("Error inesperados con MariaDB!");
-												mensajeError.setHorizontalAlignment(JLabel.CENTER);
-												mensajeError.setFont(new Font("SansSerif", 3, 14));
-												mensajeError.setForeground(new Color(224, 8, 10));
-												mensajeError.setBounds(130, 250, 310, 40);
-
-												limpiar();
-												removeAll();
-												updateUI();
-												setLayout(null);
-
-												add(error);
-												add(mensajeError);
-
-												System.out.println("Tenemos un problema aqui en Registro de Personas");
-												ex.printStackTrace(System.out);
-											}
-										}catch (NumberFormatException error) {
-											venAhorro.setVisible(false);
-											guardar();
-
-										}
-
-									}else{
-										venAhorro.setVisible(false);
-										JLabel error = new JLabel(new ImageIcon(getClass().getResource("/iconMax/error.png")));
-										error.setBounds(100, 0, 260, 260);
-
-										JLabel mensajeError = new JLabel("Error Campos vacios!");
-										mensajeError.setHorizontalAlignment(JLabel.CENTER);
-										mensajeError.setFont(new Font("SansSerif", 3, 14));
-										mensajeError.setForeground(new Color(224, 8, 10));
-										mensajeError.setBounds(130, 250, 200, 40);
-
-										limpiar();
-										removeAll();
-										updateUI();
-										setLayout(null);
-
-										add(error);
-										add(mensajeError);
-
-									}
-
-        }
-    });
-
-}else{
-
-var veri = true;
-ImageIcon imgFondo;
-imgFondo = new ImageIcon(getClass().getResource("/iconMin/fon.png"));
-
-    do {
-        try {
-
-            JFrame vFon = new JFrame("Fondo");
-            vFon.setSize(395, 98);
-            vFon.setLayout(null);
-            vFon.getContentPane().setBackground(new Color(27, 38, 49));
-
-            JLabel txt = new JLabel("Dijite el fondo: ");
-            txt.setFont(new Font("SansSerif", 3, 14));
-            txt.setForeground(new Color(0, 164, 255));
-            txt.setBounds(10, 20, 150, 30);
-
-            fon = new JTextField(20);
-            fon.setFont(new Font("SansSerif", 3, 14));
-            fon.setForeground(new Color(0, 164, 255));
-            fon.setBounds(170, 20, 150, 30);
-
-            JButton btn = new JButton();
-            btn.setIcon(imgFondo);
-            btn.setBackground(new Color(27, 38, 49));
-            btn.setBounds(325, 20, 30, 30);
-            btn.setBorder(BorderFactory.createLineBorder(new Color(27, 38, 49)));
-            btn.setBorder(new RoundedBorder(15));
-
-            vFon.add(txt);
-            vFon.add(fon);
-            vFon.add(btn);
-
-            vFon.setResizable(false);
-            vFon.setLocationRelativeTo(null);
-            vFon.setVisible(true);
-
-            JTextField finalFon = fon;
-
-            btn.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent evt) {
-
-																	if (!(
-																		"".equals(campoNombre1.getText())  &&
-																			"".equals(campoApellido1.getText())  &&
-																			"".equals(campoApellido2.getText()) &&
-																			"".equals(campoAddress.getText()) &&
-																			"".equals(campoCc.getText()) &&
-																			"".equals(campoCodigoOficina.getText()))){
-
-																		fondo = Double.parseDouble(finalFon.getText());
-																		vFon.setVisible(false);
-
-																		PreparedStatement prepared = null;
-																		Conector objtConec = new Conector();
-																		Connection conexion = null;
-
-																		try{
-
-																			if ( fondo <= 0) {
-
-																				conexion = objtConec.getConexion();
-																				prepared = conexion.prepareStatement("INSERT INTO persona (numCuenta,nombre1,nombre2,apellido1,apellido2,cc,direccion,nacimiento,sexo,tipoCuenta,codigoOficina,codigo,fondo) "
-																					+ "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?);");
-
-																				prepared.setInt(1, numCuenta);
-																				prepared.setString(2, campoNombre1.getText());
-																				prepared.setString(3, campoNombre2.getText());
-																				prepared.setString(4, campoApellido1.getText());
-																				prepared.setString(5, campoApellido2.getText());
-																				prepared.setString(6, campoCc.getText());
-																				prepared.setString(7, campoAddress.getText());
-																				prepared.setString(8, fecha);
-																				prepared.setString(9, sex);
-																				prepared.setString(10, tipoCuentaTxt);
-																				prepared.setInt(11, Integer.parseInt(campoCodigoOficina.getText()));
-																				prepared.setInt(12, codigoSeguridad());
-																				prepared.setDouble(13, fondo);
-
-																				prepared.executeUpdate();
-
-																				Object[] fila = new Object[13];
-
-																				fila[0] = numCuenta;
-																				fila[1] = campoNombre1.getText();
-																				fila[2] = campoNombre2.getText();
-																				fila[3] = campoApellido1.getText();
-																				fila[4] = campoApellido2.getText();
-																				fila[5] = campoCc.getText();
-																				fila[6] = campoAddress.getText();
-																				fila[7] = fecha;
-																				fila[8] = sex;
-																				fila[9] = tipoCuentaTxt;
-																				fila[10] = campoCodigoOficina.getText();
-																				fila[11] = codigoSeguridad();
-																				fila[12] = fondo;
-
-
-																				TablaPersonas agregar = new TablaPersonas();
-																				agregar.modelo(fila);
-																				limpiar();
-																			}else{
-
-																				JOptionPane.showMessageDialog(null,"Campos vacios");
-																			}
-
-
-																		}catch(SQLException ex){
-																			System.out.println("Tenemos un problema aqui en Registro de Personas");
-																			ex.printStackTrace(System.out);
-																		}
-
-																	}else{
-
-																		vFon.setVisible(false);
-																		JLabel error = new JLabel(new ImageIcon(getClass().getResource("/iconMax/error.png")));
-																		error.setBounds(100, 0, 260, 260);
-
-																		JLabel mensajeError = new JLabel("Error Campos vacios!");
-																		mensajeError.setHorizontalAlignment(JLabel.CENTER);
-																		mensajeError.setFont(new Font("SansSerif", 3, 14));
-																		mensajeError.setForeground(new Color(224, 8, 10));
-																		mensajeError.setBounds(130, 250, 200, 40);
-
-																		limpiar();
-																		removeAll();
-																		updateUI();
-																		setLayout(null);
-
-																		add(error);
-																		add(mensajeError);
-
-																	}
-
-
-                }
-            });
-            veri = false;
-        } catch (NumberFormatException error) {
-									JLabel img = new JLabel(new ImageIcon(getClass().getResource("/iconMax/error.png")));
-									img.setBounds(100, 0, 260, 260);
-
-									JLabel mensajeError = new JLabel("Valores no admitidos!");
+	PreparedStatement prepared = null;
+	Conector objtConec = new Conector();
+	Connection conexion = null;
+
+	JTextField fon = null;
+	boolean entrada = false;
+
+	try {
+
+		conexion = objtConec.getConexion();
+
+		numCuenta = crearNumCuenta();
+		sex = (masculino.isSelected()) ? "Masculino" : "Femenino";
+		fecha = "" + spiDia.getValue() + "-" + spiMes.getValue() + "-" + spiYear.getValue();
+
+		tipoCuentaTxt = tipoCuenta.getSelectedItem().toString();
+
+		System.out.print(tipoCuentaTxt);
+
+		if ("Ahorro".equals(tipoCuentaTxt)) {
+
+			JFrame venAhorro = new JFrame("Cuenta Ahorro");
+			venAhorro.setSize(500, 250);
+			venAhorro.getContentPane().setLayout(null);
+			venAhorro.getContentPane().setBackground(new Color(27, 38, 49));
+
+			JLabel titulo = new JLabel("Amortización", JLabel.CENTER);
+			titulo.setForeground(new Color(0, 164, 255));
+			titulo.setFont(new Font("Sansita", 3, 18));
+
+			JPanel panel = new JPanel(new FlowLayout());
+			panel.setBackground(new Color(19, 28, 51));
+			panel.setBounds(0, 0, 501, 40);
+			panel.add(titulo);
+
+			JLabel renta = new JLabel("Renta: ");
+			renta.setForeground(new Color(0, 164, 255));
+			renta.setFont(new Font("Sansita", 1, 12));
+			renta.setBounds(47, 50, 120, 30);
+
+			JTextField txtFon = new JTextField(20);
+			txtFon.setBounds(140, 50, 200, 30);
+
+			JLabel interes = new JLabel("Interes:            5% Anual");
+			interes.setForeground(new Color(0, 164, 255));
+			interes.setFont(new Font("Sansita", 1, 12));
+			interes.setBounds(47, 110, 200, 30);
+
+			JLabel cuotas = new JLabel("Cuotas: ");
+			cuotas.setForeground(new Color(0, 164, 255));
+			cuotas.setFont(new Font("Sansita", 1, 12));
+			cuotas.setBounds(47, 160, 120, 30);
+
+			JTextField txtCuotas = new JTextField(20);
+			txtCuotas.setBounds(140, 160, 200, 30);
+
+			JLabel conte = new JLabel(new ImageIcon(getClass().getResource("/iconMax/ahorros.png")));
+			conte.setBounds(360, 40, 128, 128);
+
+			JButton btnGuardar = new JButton("Guardar");
+			btnGuardar.setForeground(new Color(0, 164, 255));
+			btnGuardar.setBorder(BorderFactory.createLineBorder(new Color(0, 164, 255)));
+			btnGuardar.setBorder(new RoundedBorder(15));
+			btnGuardar.setBackground(new Color(27, 38, 49));
+			btnGuardar.setBounds(360, 176, 120, 20);
+
+			venAhorro.getContentPane().add(panel);
+			venAhorro.getContentPane().add(renta);
+			venAhorro.getContentPane().add(txtFon);
+			venAhorro.getContentPane().add(interes);
+			venAhorro.getContentPane().add(txtCuotas);
+			venAhorro.getContentPane().add(cuotas);
+			venAhorro.getContentPane().add(conte);
+			venAhorro.getContentPane().add(btnGuardar);
+
+			venAhorro.setResizable(false);
+			venAhorro.setLocationRelativeTo(null);
+			venAhorro.setVisible(true);
+
+			btnGuardar.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					if (!(
+						"".equals(campoNombre1.getText()) &&
+							"".equals(campoApellido1.getText()) &&
+							"".equals(campoApellido2.getText()) &&
+							"".equals(campoAddress.getText()) &&
+							"".equals(campoCc.getText()) &&
+							"".equals(campoCodigoOficina.getText()))) {
+
+						try {
+							venAhorro.setVisible(true);
+							tiempo = Integer.parseInt(txtCuotas.getText());
+							fondo = Double.parseDouble(txtFon.getText());
+
+
+							PreparedStatement prepared = null;
+							Conector objtConec = new Conector();
+							Connection conexion = null;
+
+							try {
+
+								if (fondo == 0 && tiempo == 0) {
+
+									conexion = objtConec.getConexion();
+									prepared = conexion.prepareStatement("INSERT INTO persona (numCuenta,nombre1,nombre2,apellido1,apellido2,cc,direccion,nacimiento,sexo,tipoCuenta,codigoOficina,codigo,fondo,tiempo) "
+										+ "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
+
+									prepared.setInt(1, numCuenta);
+									prepared.setString(2, campoNombre1.getText());
+									prepared.setString(3, campoNombre2.getText());
+									prepared.setString(4, campoApellido1.getText());
+									prepared.setString(5, campoApellido2.getText());
+									prepared.setString(6, campoCc.getText());
+									prepared.setString(7, campoAddress.getText());
+									prepared.setString(8, fecha);
+									prepared.setString(9, sex);
+									prepared.setString(10, tipoCuentaTxt);
+									prepared.setInt(11, Integer.parseInt(campoCodigoOficina.getText()));
+									prepared.setInt(12, codigoSeguridad());
+									prepared.setDouble(13, fondo);
+									prepared.setInt(14, tiempo);
+
+									prepared.executeUpdate();
+
+									Object[] fila = new Object[14];
+
+									fila[0] = numCuenta;
+									fila[1] = campoNombre1.getText();
+									fila[2] = campoNombre2.getText();
+									fila[3] = campoApellido1.getText();
+									fila[4] = campoApellido2.getText();
+									fila[5] = campoCc.getText();
+									fila[6] = campoAddress.getText();
+									fila[7] = fecha;
+									fila[8] = sex;
+									fila[9] = tipoCuentaTxt;
+									fila[10] = campoCodigoOficina.getText();
+									fila[11] = codigoSeguridad();
+									fila[12] = fondo;
+									fila[13] = tiempo;
+
+
+									TablaPersonas agregar = new TablaPersonas();
+									agregar.modelo(fila);
+									limpiar();
+
+
+								} else {
+
+									JLabel error = new JLabel(new ImageIcon(getClass().getResource("/iconMax/error.png")));
+									error.setBounds(100, 0, 260, 260);
+
+									JLabel mensajeError = new JLabel("Error fondos vacios!");
 									mensajeError.setHorizontalAlignment(JLabel.CENTER);
 									mensajeError.setFont(new Font("SansSerif", 3, 14));
 									mensajeError.setForeground(new Color(224, 8, 10));
@@ -784,19 +580,234 @@ imgFondo = new ImageIcon(getClass().getResource("/iconMin/fon.png"));
 									updateUI();
 									setLayout(null);
 
-									add(img);
+									add(error);
 									add(mensajeError);
 
 								}
-    } while (veri == true);
+							} catch (SQLException ex) {
+
+								JLabel error = new JLabel(new ImageIcon(getClass().getResource("/iconMax/error.png")));
+								error.setBounds(100, 0, 260, 260);
+
+								JLabel mensajeError = new JLabel("Error inesperados con MariaDB!");
+								mensajeError.setHorizontalAlignment(JLabel.CENTER);
+								mensajeError.setFont(new Font("SansSerif", 3, 14));
+								mensajeError.setForeground(new Color(224, 8, 10));
+								mensajeError.setBounds(130, 250, 310, 40);
+
+								limpiar();
+								removeAll();
+								updateUI();
+								setLayout(null);
+
+								add(error);
+								add(mensajeError);
+
+								System.out.println("Tenemos un problema aqui en Registro de Personas");
+								ex.printStackTrace(System.out);
+							}
+						} catch (NumberFormatException error) {
+							venAhorro.setVisible(false);
+							guardar();
+
+						}
+
+					} else {
+						venAhorro.setVisible(false);
+						JLabel error = new JLabel(new ImageIcon(getClass().getResource("/iconMax/error.png")));
+						error.setBounds(100, 0, 260, 260);
+
+						JLabel mensajeError = new JLabel("Error Campos vacios!");
+						mensajeError.setHorizontalAlignment(JLabel.CENTER);
+						mensajeError.setFont(new Font("SansSerif", 3, 14));
+						mensajeError.setForeground(new Color(224, 8, 10));
+						mensajeError.setBounds(130, 250, 200, 40);
+
+						limpiar();
+						removeAll();
+						updateUI();
+						setLayout(null);
+
+						add(error);
+						add(mensajeError);
+
+					}
+
+				}
+			});
+
+		} else {
+
+			var veri = true;
+			ImageIcon imgFondo;
+			imgFondo = new ImageIcon(getClass().getResource("/iconMin/fon.png"));
+
+			do {
+				try {
+
+					JFrame vFon = new JFrame("Fondo");
+					vFon.setSize(395, 98);
+					vFon.setLayout(null);
+					vFon.getContentPane().setBackground(new Color(27, 38, 49));
+
+					JLabel txt = new JLabel("Dijite el fondo: ");
+					txt.setFont(new Font("SansSerif", 3, 14));
+					txt.setForeground(new Color(0, 164, 255));
+					txt.setBounds(10, 20, 150, 30);
+
+					fon = new JTextField(20);
+					fon.setFont(new Font("SansSerif", 3, 14));
+					fon.setForeground(new Color(0, 164, 255));
+					fon.setBounds(170, 20, 150, 30);
+
+					JButton btn = new JButton();
+					btn.setIcon(imgFondo);
+					btn.setBackground(new Color(27, 38, 49));
+					btn.setBounds(325, 20, 30, 30);
+					btn.setBorder(BorderFactory.createLineBorder(new Color(27, 38, 49)));
+					btn.setBorder(new RoundedBorder(15));
+
+					vFon.add(txt);
+					vFon.add(fon);
+					vFon.add(btn);
+
+					vFon.setResizable(false);
+					vFon.setLocationRelativeTo(null);
+					vFon.setVisible(true);
+
+					JTextField finalFon = fon;
+
+					btn.addActionListener(new ActionListener() {
+						@Override
+						public void actionPerformed(ActionEvent evt) {
+
+							if (!(
+								"".equals(campoNombre1.getText()) &&
+									"".equals(campoApellido1.getText()) &&
+									"".equals(campoApellido2.getText()) &&
+									"".equals(campoAddress.getText()) &&
+									"".equals(campoCc.getText()) &&
+									"".equals(campoCodigoOficina.getText()))) {
+
+								fondo = Double.parseDouble(finalFon.getText());
+								vFon.setVisible(false);
+
+								PreparedStatement prepared = null;
+								Conector objtConec = new Conector();
+								Connection conexion = null;
+
+								try {
+
+									if (fondo <= 0) {
+
+										conexion = objtConec.getConexion();
+										prepared = conexion.prepareStatement("INSERT INTO persona (numCuenta,nombre1,nombre2,apellido1,apellido2,cc,direccion,nacimiento,sexo,tipoCuenta,codigoOficina,codigo,fondo) "
+											+ "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?);");
+
+										prepared.setInt(1, numCuenta);
+										prepared.setString(2, campoNombre1.getText());
+										prepared.setString(3, campoNombre2.getText());
+										prepared.setString(4, campoApellido1.getText());
+										prepared.setString(5, campoApellido2.getText());
+										prepared.setString(6, campoCc.getText());
+										prepared.setString(7, campoAddress.getText());
+										prepared.setString(8, fecha);
+										prepared.setString(9, sex);
+										prepared.setString(10, tipoCuentaTxt);
+										prepared.setInt(11, Integer.parseInt(campoCodigoOficina.getText()));
+										prepared.setInt(12, codigoSeguridad());
+										prepared.setDouble(13, fondo);
+
+										prepared.executeUpdate();
+
+										Object[] fila = new Object[13];
+
+										fila[0] = numCuenta;
+										fila[1] = campoNombre1.getText();
+										fila[2] = campoNombre2.getText();
+										fila[3] = campoApellido1.getText();
+										fila[4] = campoApellido2.getText();
+										fila[5] = campoCc.getText();
+										fila[6] = campoAddress.getText();
+										fila[7] = fecha;
+										fila[8] = sex;
+										fila[9] = tipoCuentaTxt;
+										fila[10] = campoCodigoOficina.getText();
+										fila[11] = codigoSeguridad();
+										fila[12] = fondo;
 
 
-}
-}catch(SQLException ex){
-            System.out.println("Tenemos un problema aqui en Registro de Personas");
-            ex.printStackTrace(System.out);
-        }
+										TablaPersonas agregar = new TablaPersonas();
+										agregar.modelo(fila);
+										limpiar();
+									} else {
 
+										JOptionPane.showMessageDialog(null, "Campos vacios");
+									}
+
+
+								} catch (SQLException ex) {
+									System.out.println("Tenemos un problema aqui en Registro de Personas");
+									ex.printStackTrace(System.out);
+								}
+
+							}else{
+
+								vFon.setVisible(false);
+							}
+
+
+						}
+					});
+					veri = false;
+				} catch (NumberFormatException error) {
+					JLabel img = new JLabel(new ImageIcon(getClass().getResource("/iconMax/error.png")));
+					img.setBounds(100, 0, 260, 260);
+
+					JLabel mensajeError = new JLabel("Valores no admitidos!");
+					mensajeError.setHorizontalAlignment(JLabel.CENTER);
+					mensajeError.setFont(new Font("SansSerif", 3, 14));
+					mensajeError.setForeground(new Color(224, 8, 10));
+					mensajeError.setBounds(130, 250, 200, 40);
+
+					limpiar();
+					removeAll();
+					updateUI();
+					setLayout(null);
+
+					add(img);
+					add(mensajeError);
+
+				}
+			} while (veri == true);
+
+
+		}
+	} catch (SQLException ex) {
+		System.out.println("Tenemos un problema aqui en Registro de Personas");
+		ex.printStackTrace(System.out);
+	}
+} else {
+
+
+								JLabel error = new JLabel(new ImageIcon(getClass().getResource("/iconMax/error.png")));
+								error.setBounds(100, 0, 260, 260);
+
+								JLabel mensajeError = new JLabel("Error Campos vacios!");
+								mensajeError.setHorizontalAlignment(JLabel.CENTER);
+								mensajeError.setFont(new Font("SansSerif", 3, 14));
+								mensajeError.setForeground(new Color(224, 8, 10));
+								mensajeError.setBounds(130, 250, 200, 40);
+
+								limpiar();
+								removeAll();
+								updateUI();
+								setLayout(null);
+
+								add(error);
+								add(mensajeError);
+
+							}
 }//Fin guardar
 
 //==========================================

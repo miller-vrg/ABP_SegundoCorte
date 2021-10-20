@@ -521,8 +521,6 @@ public class VentanaPrincipal extends JFrame{
 //===================================================
 
 		btnSiguiente.addActionListener(new ActionListener(){
-
-
 			@Override
 			public void actionPerformed(ActionEvent evt) {
 
@@ -713,16 +711,12 @@ public class VentanaPrincipal extends JFrame{
 
 			case 2:{
 
-
 				JScrollPane scroll = new JScrollPane();
 				scroll.setBackground(new Color(27,38,49));
 				scroll.setBounds(40,15,520,310);
 				scroll.setBorder(BorderFactory.createLineBorder(new Color(27,38,49)));
 
-
 				if(checkPersonas.isSelected()){
-
-//veri = true;
 
 					scroll.setViewportView(personas.iniciaRegistroPersona(this.dia,this.mes,this.year,this.btnSiguiente,this.btnCancelar,this.progreso,this.aumento));
 
