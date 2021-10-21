@@ -5,7 +5,7 @@ Autor Miler vargas mola
 
 Requisitos
 
-Base de Datos,
+Base de Datos MariaDB, ya que el conector es de MariaDB
 Jdk 8 o superior
 
 Nota
