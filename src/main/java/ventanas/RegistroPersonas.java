@@ -518,7 +518,7 @@ public void guardar() {
 
 							try {
 
-								if (fondo == 0 && tiempo == 0) {
+								if (!(fondo == 0 && tiempo == 0)) {
 
 									conexion = objtConec.getConexion();
 									prepared = conexion.prepareStatement("INSERT INTO persona (numCuenta,nombre1,nombre2,apellido1,apellido2,cc,direccion,nacimiento,sexo,tipoCuenta,codigoOficina,codigo,fondo,tiempo) "

@@ -655,7 +655,7 @@ public class RegistroOrganizacion extends JPanel {
 											"codigo," + //7
 											"fondo," + //8
 											"tiempo," + //9
-											"nombreRepresentate," + //10
+											"nombreRepresentante," + //10
 											"apellido1Representate," + //11
 											"apellido2Representate," + //12
 											"ccRepre," + //13
@@ -730,7 +730,7 @@ public class RegistroOrganizacion extends JPanel {
 									}
 								} catch (SQLException ex) {
 
-									JLabel error = new JLabel(new ImageIcon("/iconMax/error.png"));
+									JLabel error = new JLabel(new ImageIcon(getClass().getResource("/iconMax/error.png")));
 									error.setBounds(200, 20, 200, 200);
 
 									JLabel mensajeError = new JLabel("Error inesperado!");
