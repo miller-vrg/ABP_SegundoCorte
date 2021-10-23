@@ -143,10 +143,10 @@ if(!"".equals(busqueda)) {
     if("persona".equals(tipo)){
 
     panel1.removeAll();
-    panel1.repaint();
+    panel1.updateUI();
 
     panel2.removeAll();
-    panel2.repaint();
+    panel2.updateUI();
 
     TablaAmortizacion datos = new TablaAmortizacion(busqueda, tipo);
     var titular = datos.getNombres() + " " + datos.getApellidos();
@@ -158,26 +158,35 @@ if(!"".equals(busqueda)) {
     etiTitular.setFont(new Font("SansSerif", Font.ITALIC, 14));
     etiTitular.setForeground(new Color(0, 164, 255));
     etiTitular.setBounds(0, 20, 320, 30);
-    panel2.add(etiTitular);
+
 
     etiCc = new JLabel("N° CC: " + cc);
     etiCc.setBackground(new Color(27, 38, 49));
     etiCc.setFont(new Font("SansSerif", Font.ITALIC, 14));
     etiCc.setForeground(new Color(0, 164, 255));
     etiCc.setBounds(0, 60, 210, 30);
-    panel2.add(etiCc);
+
 
     JLabel etiNumCuenta = new JLabel("N° Cuenta: " + numCuenta);
     etiNumCuenta.setBackground(new Color(27, 38, 49));
     etiNumCuenta.setFont(new Font("SansSerif", Font.ITALIC, 14));
     etiNumCuenta.setForeground(new Color(0, 164, 255));
     etiNumCuenta.setBounds(0, 100, 210, 30);
-    panel2.add(etiNumCuenta);
 
     buscar = new TablaAmortizacion(busqueda, tipo);
 
     JScrollPane tablebusqueda = new JScrollPane(buscar.amortizacion());
     tablebusqueda.setBounds(0, 150, 660, 180);
+
+     panel1.removeAll();
+     panel1.updateUI();
+
+     panel2.removeAll();
+     panel2.updateUI();
+
+     panel2.add(etiTitular);
+     panel2.add(etiCc);
+     panel2.add(etiNumCuenta);
 
     panel2.add(tablebusqueda);
     panel1.add(etiTitle);
@@ -204,14 +213,13 @@ if(!"".equals(busqueda)) {
         etiTitular.setFont(new Font("SansSerif",Font.ITALIC,14));
         etiTitular.setForeground(new Color(0,164,255));
         etiTitular.setBounds(0,10,320,30);
-        panel2.add(etiTitular);
+
 
         etiCc= new JLabel("Dirección: " + direccion);
         etiCc.setBackground(new Color(27,38,49));
         etiCc.setFont(new Font("SansSerif",Font.ITALIC,14));
         etiCc.setForeground(new Color(0,164,255));
         etiCc.setBounds(0,40,210,30);
-        panel2.add(etiCc);
 
 
         JLabel etiEnacardo = new JLabel("Encargado: " + encargado);
@@ -219,14 +227,12 @@ if(!"".equals(busqueda)) {
         etiEnacardo.setFont(new Font("SansSerif",Font.ITALIC,14));
         etiEnacardo.setForeground(new Color(0,164,255));
         etiEnacardo.setBounds(0,70,310,30);
-        panel2.add(etiEnacardo);
 
         JLabel etiNoEmpleado = new JLabel("No empleado: " + noEmpleado);
         etiNoEmpleado.setBackground(new Color(27,38,49));
         etiNoEmpleado.setFont(new Font("SansSerif",Font.ITALIC,14));
         etiNoEmpleado.setForeground(new Color(0,164,255));
         etiNoEmpleado.setBounds(0,100,310,30);
-        panel2.add(etiNoEmpleado);
 
 
         JLabel  etiNumCuenta= new JLabel("N° Cuenta: " + numCuenta);
@@ -234,12 +240,24 @@ if(!"".equals(busqueda)) {
         etiNumCuenta.setFont(new Font("SansSerif",Font.ITALIC,14));
         etiNumCuenta.setForeground(new Color(0,164,255));
         etiNumCuenta.setBounds(0,120,210,30);
-        panel2.add(etiNumCuenta);
+
 
         buscar = new TablaAmortizacion(busqueda,tipo);
 
         JScrollPane tablebusqueda = new JScrollPane(buscar.amortizacion());
         tablebusqueda.setBounds(0,150,660,180);
+
+     panel1.removeAll();
+     panel1.updateUI();
+
+     panel2.removeAll();
+     panel2.updateUI();
+
+     panel2.add(etiTitular);
+     panel2.add(etiCc);
+     panel2.add(etiEnacardo);
+     panel2.add(etiNoEmpleado);
+     panel2.add(etiNumCuenta);
 
         panel2.add(tablebusqueda);
         panel1.add(etiTitle);

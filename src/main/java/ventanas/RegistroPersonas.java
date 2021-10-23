@@ -458,6 +458,7 @@ public void guardar() {
 
 			JTextField txtFon = new JTextField(20);
 			txtFon.setBounds(140, 50, 200, 30);
+			txtFon.setForeground(new Color(0,164,255));
 
 			JLabel interes = new JLabel("Interes:            5% Anual");
 			interes.setForeground(new Color(0, 164, 255));
@@ -471,6 +472,7 @@ public void guardar() {
 
 			JTextField txtCuotas = new JTextField(20);
 			txtCuotas.setBounds(140, 160, 200, 30);
+			txtCuotas.setForeground(new Color(0,164,255));
 
 			JLabel conte = new JLabel(new ImageIcon(getClass().getResource("/iconMax/ahorros.png")));
 			conte.setBounds(360, 40, 128, 128);
@@ -507,7 +509,7 @@ public void guardar() {
 							"".equals(campoCodigoOficina.getText()))) {
 
 						try {
-							venAhorro.setVisible(true);
+							venAhorro.setVisible(false);
 							tiempo = Integer.parseInt(txtCuotas.getText());
 							fondo = Double.parseDouble(txtFon.getText());
 
@@ -518,7 +520,7 @@ public void guardar() {
 
 							try {
 
-								if (!(fondo == 0 && tiempo == 0)) {
+								if (fondo != 0 && tiempo != 0) {
 
 									conexion = objtConec.getConexion();
 									prepared = conexion.prepareStatement("INSERT INTO persona (numCuenta,nombre1,nombre2,apellido1,apellido2,cc,direccion,nacimiento,sexo,tipoCuenta,codigoOficina,codigo,fondo,tiempo) "
@@ -558,6 +560,8 @@ public void guardar() {
 									fila[12] = fondo;
 									fila[13] = tiempo;
 
+									Icon icon = new ImageIcon(getClass().getResource("/iconMin/exito.png"));
+									JOptionPane.showMessageDialog(null,"Guaradado exitoso","",JOptionPane.INFORMATION_MESSAGE,icon);
 
 									TablaPersonas agregar = new TablaPersonas();
 									agregar.modelo(fila);
@@ -698,7 +702,7 @@ public void guardar() {
 
 								try {
 
-									if (fondo <= 0) {
+									if (fondo != 0) {
 
 										conexion = objtConec.getConexion();
 										prepared = conexion.prepareStatement("INSERT INTO persona (numCuenta,nombre1,nombre2,apellido1,apellido2,cc,direccion,nacimiento,sexo,tipoCuenta,codigoOficina,codigo,fondo) "
@@ -736,13 +740,32 @@ public void guardar() {
 										fila[11] = codigoSeguridad();
 										fila[12] = fondo;
 
+										Icon icon = new ImageIcon(getClass().getResource("/iconMin/exito.png"));
+										JOptionPane.showMessageDialog(null,"Guaradado exitoso","",JOptionPane.INFORMATION_MESSAGE,icon);
 
 										TablaPersonas agregar = new TablaPersonas();
 										agregar.modelo(fila);
 										limpiar();
 									} else {
 
-										JOptionPane.showMessageDialog(null, "Campos vacios");
+										JLabel error = new JLabel(new ImageIcon(getClass().getResource("/iconMax/error.png")));
+										error.setBounds(200, 20, 200, 200);
+
+										JLabel mensajeError = new JLabel("Fondo vacio!");
+										mensajeError.setHorizontalAlignment(JLabel.CENTER);
+										mensajeError.setFont(new Font("SansSerif", 3, 14));
+										mensajeError.setForeground(new Color(224, 8, 10));
+										mensajeError.setBounds(130, 250, 200, 40);
+
+										limpiar();
+										removeAll();
+										updateUI();
+										setLayout(null);
+
+										add(error);
+										add(mensajeError);
+										System.out.println("Tenemos un problema aqui en Registro de Personas");
+
 									}
 
 

@@ -35,7 +35,8 @@ public boolean isCellEditable(int row, int column){
 
 return false;
 }  
-};   
+};
+
     int tiempo;
     double renta;
     DecimalFormat cortar = new DecimalFormat("####.##");
@@ -119,34 +120,37 @@ if("persona".equals(tipo)){
     }
 }
 
-int e = 0;
-double  anual = 0.05 / 12;
-double pagos1 = renta * anual / (1 - (Math.pow((1 + anual),-tiempo)));
-double cuotas = pagos1 - ( renta / tiempo);
+if(tiempo > 0){
+
+    int e = 0;
+    double  anual = 0.05 / 12;
+    double pagos1 = renta * anual / (1 - (Math.pow((1 + anual),-tiempo)));
+    double cuotas = pagos1 - ( renta / tiempo);
+
+    while(this.tiempo >= e ){
+
+        Object[] filas = new Object[this.tiempo];
+
+        double  interes = 0;
+        double capital = 0;
 
 
-while(this.tiempo >= e ){
+        if( e != 0){
+            interes = renta * anual;
+            capital = pagos1 - interes;
+            renta -= pagos1;
+        }
+        filas[0] = e;
+        filas[1] = (e == 0)? 0 :cortar.format(pagos1);
+        filas[2] = cortar.format(interes);
+        filas[3] = cortar.format(capital);
+        filas[4] = cortar.format((renta <= 0)? 0 : renta);
 
-Object[] filas = new Object[this.tiempo];
+        e ++;
+        modelo.addRow(filas);
+    }
 
-    double  interes = 0;
-    double capital = 0;
 
-
-if( e != 0){
-    interes = renta * anual;
-    capital = pagos1 - interes;
-    renta -= pagos1;
-}
-    filas[0 ] = e;
-    filas[1] = (e == 0)? 0 :cortar.format(pagos1);
-    filas[2] = cortar.format(interes);
-    filas[3] = cortar.format(capital);
-    filas[4] = cortar.format((renta <= 0)? 0 : renta);
-
-    e ++;
-modelo.addRow(filas);
-}
 
     for(int i = 0; i < 10; i++){
 
@@ -154,9 +158,26 @@ modelo.addRow(filas);
         modelo.addRow(filas);
     }
 
-this.setBackground(new Color(27,38,49));
-this.setForeground(new Color(255,255,255));
-this.setGridColor(new Color(0,164,255));
+    this.setBackground(new Color(27,38,49));
+    this.setForeground(new Color(255,255,255));
+    this.setGridColor(new Color(0,164,255));
+
+}else{
+
+    Icon icon = new ImageIcon(getClass().getResource("/iconMin/boton-error32.png"));
+    JOptionPane.showMessageDialog(null,"La busqueda no tubo exito","ERROR!",JOptionPane.ERROR_MESSAGE,icon);
+
+this.removeAll();
+this.updateUI();
+
+nombres = "";
+cc = "";
+numCuenta = "";
+encargado = "";
+direccion = "";
+    NoEmpleado = "";
+    apellidos = "";
+}
 
 } catch (SQLException ex) {
 
@@ -171,10 +192,6 @@ return this;
 
     public String getNombres() {
         return nombres;
-    }
-
-    public String getencargado() {
-        return getEncargado();
     }
 
     public String getCc() {

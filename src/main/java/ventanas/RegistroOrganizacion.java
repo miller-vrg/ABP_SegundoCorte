@@ -113,6 +113,7 @@ public class RegistroOrganizacion extends JPanel {
 
 			campoNombreEmpresa = new JTextField(20);
 			campoNombreEmpresa.setFont(new Font("SansSerif",3,12));
+			campoNombreEmpresa.setForeground(new Color(0,164,255));
 			campoNombreEmpresa.setToolTipText("Nombre de la empresa");
 			campoNombreEmpresa.setSize(150,30);
 
@@ -137,6 +138,7 @@ public class RegistroOrganizacion extends JPanel {
 			campoDireccion = new JTextField("",20);
 			campoDireccion.setFont(new Font("SansSerif",3,12));
 			campoDireccion.setToolTipText("Direccion");
+			campoDireccion.setForeground(new Color(0,164,255));
 			campoDireccion.setSize(150,30);
 
 			constraints.gridx = 1;
@@ -160,6 +162,7 @@ public class RegistroOrganizacion extends JPanel {
 			campoCodigoOficina = new JTextField("",20);
 			campoCodigoOficina.setFont(new Font("SansSerif",3,12));
 			campoCodigoOficina.setToolTipText("Direccion");
+			campoCodigoOficina.setForeground(new Color(0,164,255));
 			campoCodigoOficina.setSize(150,30);
 
 			constraints.gridx = 1;
@@ -299,6 +302,7 @@ public class RegistroOrganizacion extends JPanel {
 
 			campoPrimerApelliRepre = new JTextField("",20);
 			campoPrimerApelliRepre.setFont(new Font("SansSerif",3,12));
+			campoPrimerApelliRepre.setFont(new Font("SansSerif",3,12));
 
 			constraints.gridx = 1;
 			constraints.gridwidth = 2;
@@ -319,6 +323,7 @@ public class RegistroOrganizacion extends JPanel {
 
 			campoSegundoApelliRepre = new JTextField("",20);
 			campoSegundoApelliRepre.setFont(new Font("SansSerif",3,12));
+			campoSegundoApelliRepre.setForeground(new Color(0,164,255));
 
 			constraints.gridx = 1;
 			constraints.gridwidth = 2;
@@ -339,6 +344,7 @@ public class RegistroOrganizacion extends JPanel {
 
 			campoCcRepre= new JTextField("",20);
 			campoCcRepre.setFont(new Font("SansSerif",3,12));
+			campoCcRepre.setForeground(new Color(0,164,255));
 
 			constraints.gridx = 1;
 			constraints.gridwidth = 2;
@@ -405,6 +411,7 @@ public class RegistroOrganizacion extends JPanel {
 
 			campoSegundoNombreNoEmple = new JTextField("",20);
 			campoSegundoNombreNoEmple.setFont(new Font("SansSerif",3,12));
+			campoSegundoNombreNoEmple.setForeground(new Color(0,164,255));
 
 			constraints.gridx = 1;
 			constraints.gridwidth = 2;
@@ -425,6 +432,7 @@ public class RegistroOrganizacion extends JPanel {
 
 			campoPrimerApelliNoEmple  = new JTextField("",20);
 			campoPrimerApelliNoEmple.setFont(new Font("SansSerif",3,12));
+			campoPrimerApelliNoEmple.setForeground(new Color(0,164,255));
 
 			constraints.gridx = 1;
 			constraints.gridwidth = 2;
@@ -445,6 +453,7 @@ public class RegistroOrganizacion extends JPanel {
 
 			campoSegundoApelliNoEmple  = new JTextField("",20);
 			campoSegundoApelliNoEmple.setFont(new Font("SansSerif",3,12));
+			campoSegundoApelliNoEmple.setForeground(new Color(0,164,255));
 
 			constraints.gridx = 1;
 			constraints.gridwidth = 2;
@@ -465,6 +474,7 @@ public class RegistroOrganizacion extends JPanel {
 
 			campoCcNoEmple = new JTextField("",20);
 			campoCcNoEmple.setFont(new Font("SansSerif",3,12));
+			campoCcNoEmple.setForeground(new Color(0,164,255));
 
 			constraints.gridx = 1;
 			constraints.gridwidth = 2;
@@ -585,6 +595,7 @@ public class RegistroOrganizacion extends JPanel {
 
 					JTextField txtFon = new JTextField("",20);
 					txtFon.setBounds(140, 50, 200, 30);
+					txtFon.setForeground(new Color(0,164,255));
 
 					JLabel interes = new JLabel("Interes:            5% Anual");
 					interes.setForeground(new Color(0, 164, 255));
@@ -598,6 +609,7 @@ public class RegistroOrganizacion extends JPanel {
 
 					JTextField txtCuotas = new JTextField("",20);
 					txtCuotas.setBounds(140, 160, 200, 30);
+					txtCuotas.setForeground(new Color(0,164,255));
 
 					JLabel conte = new JLabel(new ImageIcon(getClass().getResource("/iconMax/ahorros.png")));
 					conte.setBounds(360, 40, 128, 128);
@@ -642,7 +654,7 @@ public class RegistroOrganizacion extends JPanel {
 
 								try {
 
-									if (!( fondo == 0 && tiempo == 0)) {
+									if ( fondo != 0 && tiempo != 0) {
 										venAhorro.setVisible(false);
 										conexion = objtConec.getConexion();
 										prepared = conexion.prepareStatement("INSERT INTO organizacion " +
@@ -705,12 +717,15 @@ public class RegistroOrganizacion extends JPanel {
 										fila[15] = campoSegundoApelliNoEmple.getText();
 										fila[16] = ccNoEmple;
 
+										Icon icon = new ImageIcon(getClass().getResource("/iconMin/exito.png"));
+										JOptionPane.showMessageDialog(null,"Guaradado exitoso","",JOptionPane.INFORMATION_MESSAGE,icon);
 
 										TablaOrganizacion agregar = new TablaOrganizacion();
 										agregar.modelo(fila);
 										limpiar();
 
 									} else {
+
 										JLabel error = new JLabel(new ImageIcon("/iconMax/error.png"));
 										error.setBounds(200, 20, 200, 200);
 
@@ -746,8 +761,9 @@ public class RegistroOrganizacion extends JPanel {
 
 									add(error);
 									add(mensajeError);
-									System.out.println("Tenemos un problema aqui en Registro de Personas");
+									System.out.println("Tenemos un problema aqui en Registro de Organización");
 									ex.printStackTrace(System.out);
+
 								}
 							} catch (NumberFormatException error) {
 								venAhorro.removeAll();
@@ -776,7 +792,6 @@ public class RegistroOrganizacion extends JPanel {
 					ImageIcon imgFondo;
 					imgFondo = new ImageIcon(getClass().getResource("/iconMin/fon.png"));
 
-					do {
 						try {
 
 							JFrame vFon = new JFrame("Fondo");
@@ -819,17 +834,17 @@ public class RegistroOrganizacion extends JPanel {
 
 									if(!(
 										numCuenta == 0 &&
-											"".equals(campoNombreEmpresa.getText()) &&
-											"".equals(campoDireccion.getText()) &&
-											"".equals(campoPrimerNombreRepre.getText()) &&
-											"".equals(campoSegundoNombreRepre.getText()) &&
-											"".equals(campoSegundoApelliRepre.getText()) &&
-											"".equals(campoPrimerApelliRepre.getText()) &&
-											"".equals(campoCcRepre.getText()) &&
-											"".equals(campoPrimerNombreNoEmple.getText()) &&
-											"".equals(campoSegundoNombreNoEmple.getText()) &&
-											"".equals(campoSegundoApelliNoEmple.getText()) &&
-											"".equals(campoPrimerApelliNoEmple.getText()) &&
+											"".equals(campoNombreEmpresa.getText()) ||
+											"".equals(campoDireccion.getText()) ||
+											"".equals(campoPrimerNombreRepre.getText()) ||
+											"".equals(campoSegundoNombreRepre.getText()) ||
+											"".equals(campoSegundoApelliRepre.getText()) ||
+											"".equals(campoPrimerApelliRepre.getText()) ||
+											"".equals(campoCcRepre.getText()) ||
+											"".equals(campoPrimerNombreNoEmple.getText()) ||
+											"".equals(campoSegundoNombreNoEmple.getText()) ||
+											"".equals(campoSegundoApelliNoEmple.getText()) ||
+											"".equals(campoPrimerApelliNoEmple.getText()) ||
 											"".equals(campoCcNoEmple.getText()))) {
 
 										PreparedStatement prepared = null;
@@ -838,7 +853,7 @@ public class RegistroOrganizacion extends JPanel {
 
 										try {
 
-											if ( fondo == 0) {
+											if ( fondo != 0) {
 
 												conexion = objtConec.getConexion();
 												prepared = conexion.prepareStatement("INSERT INTO organizacion " +
@@ -898,12 +913,16 @@ public class RegistroOrganizacion extends JPanel {
 												fila[14] = campoSegundoApelliNoEmple.getText();
 												fila[15] = ccNoEmple;
 
+												Icon icon = new ImageIcon(getClass().getResource("/iconMin/exito.png"));
+												JOptionPane.showMessageDialog(null,"Guaradado exitoso","",JOptionPane.INFORMATION_MESSAGE,icon);
+
 												TablaOrganizacion agregar = new TablaOrganizacion();
 												agregar.modelo(fila);
 												limpiar();
+
 											}else{
 
-												JLabel img = new JLabel(new ImageIcon("/iconMax/error.png"));
+												JLabel img = new JLabel(new ImageIcon(getClass().getResource("/iconMax/error.png")));
 												img.setBounds(200, 20, 200, 200);
 
 												JLabel mensajeError = new JLabel("Campos Vacios");
@@ -943,6 +962,7 @@ public class RegistroOrganizacion extends JPanel {
 
 											ex.printStackTrace(System.out);
 										}
+
 									}else{
 
 										vFon.removeAll();
@@ -985,9 +1005,6 @@ public class RegistroOrganizacion extends JPanel {
 							add(img);
 							add(mensajeError);
 						}
-
-					} while (veri == true);
-
 
 				}
 			} catch (SQLException ex) {
