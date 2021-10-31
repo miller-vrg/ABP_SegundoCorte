@@ -61,3 +61,7 @@ CREATE TABLE `persona` (
   CONSTRAINT `PRIMARY` PRIMARY KEY (`numCuenta`),
   CONSTRAINT `numCuenta` UNIQUE (`numCuenta`)
 );
+
+//Busqueda de cantidad de empleados con cuentas
+//SELECT nombre1,nombre2,apellido1,apellido2,cc FROM  empleados,organizacion WHERE cc = '242344' AND ccRepre = '242344';
+

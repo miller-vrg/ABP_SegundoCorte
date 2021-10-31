@@ -619,8 +619,6 @@ public class VentanaPrincipal extends JFrame{
 
 			case 1:{
 
-				try{
-
 					JLabel etiPregunta = new JLabel("¿Es una organización  o una persona?");
 					etiPregunta.setHorizontalAlignment(JLabel.CENTER);
 					etiPregunta.setBackground(new Color(27,38,49));
@@ -670,38 +668,6 @@ public class VentanaPrincipal extends JFrame{
 					panel2.add(progreso);
 					panel2.add(btnSiguiente);
 					panel2.add(btnCancelar);
-
-
-				}catch(Exception e){
-
-					error = new JLabel(new ImageIcon("/iconMax/error.png"));
-					error.setBounds(200,20,200,200);
-
-					mensajeError = new JLabel("Error inesperado!");
-					mensajeError.setHorizontalAlignment(JLabel.CENTER);
-					mensajeError.setFont(new Font("FreeMono",3,14));
-					mensajeError.setForeground(new Color(224,8,10));
-					mensajeError.setBorder(BorderFactory.createLineBorder(new Color(224,8,10)));
-					mensajeError.setBounds(70,220,440,40);
-					mensajeError.setBorder(new RoundedBorder(15));
-
-
-					panel1.removeAll();
-					panel1.repaint();
-
-					panel1.add(btnInicio);
-					panel1.add(reloj);
-					panel1.add(btnSucursales);
-					panel1.add(btnRegistro);
-					panel1.add(btnRegistrar);
-
-					panel2.removeAll();
-					panel2.repaint();
-
-					panel2.add(error);
-					panel2.add(mensajeError);
-
-				}
 
 			}break;
 
@@ -783,8 +749,6 @@ public class VentanaPrincipal extends JFrame{
 
 			case 3:{
 
-				try {
-
 					ImageIcon formulario = new ImageIcon(getClass().getResource("/iconMax/formulario.png"));
 
 					JLabel ima = new JLabel();
@@ -807,13 +771,11 @@ public class VentanaPrincipal extends JFrame{
 					panel2.add(finRegistro);
 
 
-				} catch (Exception e) {
-
-				}
 			}break;
 
 		}
 	}
+
 	public  void agregar(){
 		int dia,mes,year,hora,minuto,segundos;
 
@@ -843,8 +805,6 @@ public class VentanaPrincipal extends JFrame{
 		this.setHora(hora);
 		this.setMinuto(minuto);
 		this.setSegundos(segundos);
-
-		//System.out.println("dia: " + dia + "- mes: " + mes + " - año: " + anyo );
 
 	}//fin asignar fecha
 

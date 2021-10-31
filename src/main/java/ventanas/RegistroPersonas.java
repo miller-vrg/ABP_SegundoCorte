@@ -385,7 +385,7 @@ this.add(campoCodigoOficina,constraints);
 
 } catch (NumberFormatException ex) {
 
-JLabel error = new JLabel(new ImageIcon("/run/media/gasler/Nuevo vol/abpSarayLopezMIlerCargasGrupo4/img/iconMax/error.png"));
+JLabel error = new JLabel(new ImageIcon(getClass().getResource("/iconMax/error.png")));
 error.setBounds(200,20,200,200);
 
 JLabel mensajeError = new JLabel("Algunos campos no son validos");

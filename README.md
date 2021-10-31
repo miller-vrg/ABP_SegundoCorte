@@ -14,7 +14,7 @@ Jdk 8 o superior
 
 La craeación de la base de datos estan en txt (Craecion_DB_MariaDb)
 
-Los recursos iconos de del programa vienene flaticon
+Los recursos iconos de del programa vienen de flaticon
 la licencia estara en la carpeta licencia
 
 recomendado, buenos iconos
