@@ -58,6 +58,7 @@ public class TablaEmpleados extends JTable {
 			modelo.addColumn("Apellido2 ");//6
 			modelo.addColumn("CC#");//7
 
+
 			this.setModel(modelo);
 
 			             //{ 1   2   3   4   5   6  7 }
