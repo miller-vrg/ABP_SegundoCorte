@@ -8,7 +8,7 @@ import javax.swing.border.Border;
 
 /**
  *
- * @author Miller Vargas Mola 87223
+ * @author 
  */
 
 public class RoundedBorder implements Border {
