@@ -1,20 +1,20 @@
 # ABP_SegundoCorte
-Programa bancario
+##Programa bancario
 
--------------------- Autor ------------------------
+**-------------------- Autor ------------------------**
 
-Miler vargas mola
+**Miler vargas mola**
 
------------------- Requisitos ---------------------
+**------------------ Requisitos ---------------------**
 
 Base de Datos MariaDB, ya que el conector es de MariaDB
 Jdk 8 o superior
 
---------------------- Nota ------------------------
+**--------------------- Nota ------------------------**
 
-La craeación de la base de datos estan en txt (Craecion_DB_MariaDb)
+La craeación de la base de datos estan en txt (**Craecion_DB_MariaDb**)
 
 Los recursos iconos de del programa vienen de flaticon
 la licencia estara en la carpeta licencia
 
-recomendado, buenos iconos [Falticon](https://www.flaticon.es/)
+recomendado, buenos iconos **[Falticon](https://www.flaticon.es/)**
