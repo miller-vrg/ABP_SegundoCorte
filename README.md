@@ -17,5 +17,4 @@ La craeación de la base de datos estan en txt (Craecion_DB_MariaDb)
 Los recursos iconos de del programa vienen de flaticon
 la licencia estara en la carpeta licencia
 
-recomendado, buenos iconos
- https://www.flaticon.es/ 
+recomendado, buenos iconos [Falticon](https://www.flaticon.es/)
